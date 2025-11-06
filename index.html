@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>My Image Host</title>
+	<style>
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+			margin: 0;
+			padding: 2rem;
+			background-color: #f6f8fa;
+			color: #24292e;
+		}
+
+		main {
+			max-width: 900px;
+			margin: 0 auto;
+		}
+
+		h1 {
+			border-bottom: 1px solid #e1e4e8;
+			padding-bottom: 10px;
+		}
+
+		.image-entry {
+			background-color: #fff;
+			border: 1px solid #d1d5da;
+			border-radius: 6px;
+			margin-bottom: 20px;
+			overflow: hidden;
+		}
+
+		.image-entry h3 {
+			margin: 0;
+			padding: 1rem;
+			background-color: #f6f8fa;
+			border-bottom: 1px solid #d1d5da;
+		}
+
+		.image-entry img {
+			max-width: 100%;
+			height: auto;
+			display: block;
+			padding: 1rem;
+			box-sizing: border-box;
+		}
+
+		.image-entry code {
+			display: block;
+			padding: 1rem;
+			background-color: #f6f8fa;
+			border-top: 1px solid #e1e4e8;
+			word-break: break-all;
+		}
+	</style>
+</head>
+
+<body>
+
+	<main>
+		<h1>My Email Images</h1>
+		<p>Right-click an image and "Copy Image" or copy its URL from below.</p>
+
+		<div id="image-container">
+			<p id="loading-message">Loading images from the repository...</p>
+		</div>
+	</main>
+
+	<script>
+		// --- 1. CONFIGURE THIS ---
+		const USERNAME = "Mano29rs"; // Replace with your GitHub username
+		const REPO_NAME = "resources";    // Replace with your repository name
+		// -------------------------
+
+		// --- 2. DEFINE FOLDER AND URLS ---
+		const FOLDER_PATH = "images";
+		const apiURL = `https://api.github.com/repos/${USERNAME}/${REPO_NAME}/contents/${FOLDER_PATH}`;
+		const imageBaseURL = `https://${USERNAME}.github.io/${REPO_NAME}/${FOLDER_PATH}/`;
+
+		// --- 3. GET DOM ELEMENTS ---
+		const container = document.getElementById('image-container');
+		const loadingMessage = document.getElementById('loading-message');
+
+		// --- 4. FETCH AND DISPLAY IMAGES ---
+		fetch(apiURL)
+			.then(response => {
+				if (!response.ok) {
+					throw new Error(`Failed to fetch repository contents: ${response.statusText}`);
+				}
+				return response.json();
+			})
+			.then(files => {
+				loadingMessage.style.display = 'none'; // Hide loading message
+
+				if (!Array.isArray(files)) {
+					container.innerHTML = `<p>Error: The folder '${FOLDER_PATH}' was not found or is empty.</p>`;
+					console.error("Response was not an array:", files);
+					return;
+				}
+
+				const imageFiles = files.filter(file =>
+					file.type === 'file' &&
+					(file.name.endsWith('.png') ||
+						file.name.endsWith('.jpg') ||
+						file.name.endsWith('.jpeg') ||
+						file.name.endsWith('.gif'))
+				);
+
+				if (imageFiles.length === 0) {
+					container.innerHTML = `<p>No images found in the '${FOLDER_PATH}' folder.</p>`;
+					return;
+				}
+
+				imageFiles.forEach(file => {
+					const fileURL = imageBaseURL + file.name;
+
+					// Create the HTML elements for each image
+					const entryDiv = document.createElement('div');
+					entryDiv.className = 'image-entry';
+
+					const title = document.createElement('h3');
+					title.textContent = file.name;
+
+					const img = document.createElement('img');
+					img.src = fileURL;
+					img.alt = file.name;
+
+					const code = document.createElement('code');
+					code.textContent = fileURL;
+
+					// Append elements
+					entryDiv.appendChild(title);
+					entryDiv.appendChild(img);
+					entryDiv.appendChild(code);
+					container.appendChild(entryDiv);
+				});
+			})
+			.catch(error => {
+				console.error(error);
+				loadingMessage.textContent = `Error: ${error.message}. Check your console and make sure the USERNAME and REPO_NAME are correct.`;
+			});
+	</script>
+</body>
+
+</html>
