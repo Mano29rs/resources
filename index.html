@@ -43,7 +43,6 @@
 			max-width: 100%;
 			height: auto;
 			display: block;
-			/* padding: 1rem; */
 			box-sizing: border-box;
 		}
 
@@ -60,7 +59,7 @@
 <body>
 
 	<main>
-		<h1>My Email Images</h1>
+		<h1>Assinaturas Krypton</h1>
 		<p>Right-click an image and "Copy Image" or copy its URL from below.</p>
 
 		<div id="image-container">
@@ -69,21 +68,16 @@
 	</main>
 
 	<script>
-		// --- 1. CONFIGURE THIS ---
-		const USERNAME = "Mano29rs"; // Replace with your GitHub username
-		const REPO_NAME = "resources";    // Replace with your repository name
-		// -------------------------
+		const USERNAME = "Mano29rs";
+		const REPO_NAME = "resources";
 
-		// --- 2. DEFINE FOLDER AND URLS ---
 		const FOLDER_PATH = "images";
 		const apiURL = `https://api.github.com/repos/${USERNAME}/${REPO_NAME}/contents/${FOLDER_PATH}`;
 		const imageBaseURL = `https://${USERNAME}.github.io/${REPO_NAME}/${FOLDER_PATH}/`;
 
-		// --- 3. GET DOM ELEMENTS ---
 		const container = document.getElementById('image-container');
 		const loadingMessage = document.getElementById('loading-message');
 
-		// --- 4. FETCH AND DISPLAY IMAGES ---
 		fetch(apiURL)
 			.then(response => {
 				if (!response.ok) {
@@ -92,7 +86,7 @@
 				return response.json();
 			})
 			.then(files => {
-				loadingMessage.style.display = 'none'; // Hide loading message
+				loadingMessage.style.display = 'none';
 
 				if (!Array.isArray(files)) {
 					container.innerHTML = `<p>Error: The folder '${FOLDER_PATH}' was not found or is empty.</p>`;
@@ -100,13 +94,15 @@
 					return;
 				}
 
-				const imageFiles = files.filter(file =>
-					file.type === 'file' &&
-					(file.name.endsWith('.png') ||
-						file.name.endsWith('.jpg') ||
-						file.name.endsWith('.jpeg') ||
-						file.name.endsWith('.gif'))
-				);
+				const imageFiles = files.filter(file => {
+					const fileName = file.name.toLowerCase();
+					return file.type === 'file' &&
+						(fileName.endsWith('.png') ||
+							fileName.endsWith('.jpg') ||
+							fileName.endsWith('.jpeg') ||
+							fileName.endsWith('.gif') ||
+							fileName.endsWith('.svg'));
+				});
 
 				if (imageFiles.length === 0) {
 					container.innerHTML = `<p>No images found in the '${FOLDER_PATH}' folder.</p>`;
@@ -116,7 +112,6 @@
 				imageFiles.forEach(file => {
 					const fileURL = imageBaseURL + file.name;
 
-					// Create the HTML elements for each image
 					const entryDiv = document.createElement('div');
 					entryDiv.className = 'image-entry';
 
@@ -130,7 +125,6 @@
 					const code = document.createElement('code');
 					code.textContent = fileURL;
 
-					// Append elements
 					entryDiv.appendChild(title);
 					entryDiv.appendChild(img);
 					entryDiv.appendChild(code);
