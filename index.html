@@ -68,72 +68,73 @@
 	</main>
 
 	<script>
+		const USERNAME = "Mano29rs";
+		const REPO_NAME = "resources";
+
+		const FOLDER_PATH = "images";
+		const apiURL = `https://api.github.com/repos/${USERNAME}/${REPO_NAME}/contents/${FOLDER_PATH}`;
+		const imageBaseURL = `https://${USERNAME}.github.io/${REPO_NAME}/${FOLDER_PATH}/`;
+
 		const container = document.getElementById('image-container');
 		const loadingMessage = document.getElementById('loading-message');
 
-		async function loadImages() {
-			try {
-				const response = await fetch('/images/');
-				const html = await response.text();
-
-				const parser = new DOMParser();
-				const doc = parser.parseFromString(html, 'text/html');
-				const links = doc.querySelectorAll('a[href]');
-
-				const imageFiles = [];
-				links.forEach(link => {
-					const href = link.getAttribute('href');
-					if (href && href !== '../') {
-						const fileName = href.toLowerCase();
-						if (fileName.endsWith('.png') ||
-							fileName.endsWith('.jpg') ||
-							fileName.endsWith('.jpeg') ||
-							fileName.endsWith('.gif') ||
-							fileName.endsWith('.svg')) {
-							imageFiles.push(href);
-						}
-					}
-				});
-
+		fetch(apiURL)
+			.then(response => {
+				if (!response.ok) {
+					throw new Error(`Failed to fetch repository contents: ${response.statusText}`);
+				}
+				return response.json();
+			})
+			.then(files => {
 				loadingMessage.style.display = 'none';
 
-				if (imageFiles.length === 0) {
-					container.innerHTML = `<p>No images found in the images folder.</p>`;
+				if (!Array.isArray(files)) {
+					container.innerHTML = `<p>Error: The folder '${FOLDER_PATH}' was not found or is empty.</p>`;
+					console.error("Response was not an array:", files);
 					return;
 				}
 
-				imageFiles.forEach(fileName => {
-					const fileURL = `/images/${fileName}`;
+				const imageFiles = files.filter(file => {
+					const fileName = file.name.toLowerCase();
+					return file.type === 'file' &&
+						(fileName.endsWith('.png') ||
+							fileName.endsWith('.jpg') ||
+							fileName.endsWith('.jpeg') ||
+							fileName.endsWith('.gif') ||
+							fileName.endsWith('.svg'));
+				});
+
+				if (imageFiles.length === 0) {
+					container.innerHTML = `<p>No images found in the '${FOLDER_PATH}' folder.</p>`;
+					return;
+				}
+
+				imageFiles.forEach(file => {
+					const fileURL = imageBaseURL + file.name;
 
 					const entryDiv = document.createElement('div');
 					entryDiv.className = 'image-entry';
 
 					const title = document.createElement('h3');
-					title.textContent = fileName;
+					title.textContent = file.name;
 
 					const img = document.createElement('img');
 					img.src = fileURL;
-					img.alt = fileName;
-					img.onerror = function () {
-						this.parentElement.style.display = 'none';
-					};
+					img.alt = file.name;
 
 					const code = document.createElement('code');
-					code.textContent = window.location.origin + fileURL;
+					code.textContent = fileURL;
 
 					entryDiv.appendChild(title);
 					entryDiv.appendChild(img);
 					entryDiv.appendChild(code);
 					container.appendChild(entryDiv);
 				});
-
-			} catch (error) {
-				loadingMessage.textContent = 'Error loading images. Make sure the /images/ folder exists and is accessible.';
-				console.error('Error loading images:', error);
-			}
-		}
-
-		loadImages();
+			})
+			.catch(error => {
+				console.error(error);
+				loadingMessage.textContent = `Error: ${error.message}. Check your console and make sure the USERNAME and REPO_NAME are correct.`;
+			});
 	</script>
 </body>
 
