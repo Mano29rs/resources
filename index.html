@@ -284,9 +284,13 @@
 			const phone = formatPhoneNumber(phoneInput.value || '+351 912 253 136');
 			const isInternational = internationalInput.checked;
 
+			const bestImage = isInternational
+				? 'https://mano29rs.github.io/resources/images/best_kryptINT.gif'
+				: 'https://mano29rs.github.io/resources/images/best_krypt.gif';
+
 			const kryptonImage = isInternational
 				? 'https://mano29rs.github.io/resources/images/kryptonINT.gif'
-				: 'https://mano29rs.github.io/resources/images/krypton1.GIF';
+				: 'https://mano29rs.github.io/resources/images/krypton1.GIF';	
 
 			const signature = `
 				<div dir="ltr" style="font-size: 19px;">
@@ -302,7 +306,7 @@
 							<a href="http://www.kryptonfilms.com/">www.kryptonfilms.com</a><br><br>
 						</font>
 						<img src="${kryptonImage}" alt="krypton logo"><br>
-						<img src="https://mano29rs.github.io/resources/images/best_krypt.gif" alt="best_krypt.gif"><br><br>
+						<img src="${bestImage}" alt="best krypton"><br><br>
 					</div>
 					<font color="#afafaf" face="AvenirNext-Italic" style="font-size: 9px;">
 						<i>
