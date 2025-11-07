@@ -331,11 +331,22 @@
 		generateBtn.addEventListener('click', generateSignature);
 
 		copyBtn.addEventListener('click', () => {
+			// Get just the signature HTML content without the preview container styling
 			const signatureHTML = signatureOutput.innerHTML;
 
-			// Create a temporary element to copy the HTML
+			// Create a temporary element with transparent background
 			const tempDiv = document.createElement('div');
 			tempDiv.innerHTML = signatureHTML;
+			tempDiv.style.background = 'transparent';
+			tempDiv.style.backgroundColor = 'transparent';
+
+			// Make sure all child elements also have transparent backgrounds
+			const allElements = tempDiv.querySelectorAll('*');
+			allElements.forEach(element => {
+				element.style.background = 'transparent';
+				element.style.backgroundColor = 'transparent';
+			});
+
 			document.body.appendChild(tempDiv);
 
 			// Select the content
@@ -366,9 +377,7 @@
 				document.body.removeChild(tempDiv);
 				selection.removeAllRanges();
 			}
-		});
-
-		// GitHub Images Loading
+		});		// GitHub Images Loading
 		const USERNAME = "Mano29rs";
 		const REPO_NAME = "resources";
 
