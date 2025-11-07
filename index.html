@@ -300,6 +300,16 @@
 				? 'This message and any attached documents are intended solely for the persons named therein as recipients and contain confidential and legally protected material. Please be advised that unauthorised use thereof is prohibited by law. If you receive this message in error, or are not the intended recipient, please contact us by email or telephone and delete the message and attachments without reproducing or transmitting them to any third party. Opinions, conclusions or any other information expressed in this message that are not related to the business of Krypton – Produção de Ideias para a Comunicação, Lda. should be understood as never having been given or endorsed by the same.'
 				: 'Esta mensagem e documentos eventualmente em anexo destinam-se exclusivamente às pessoas nela indicadas como destinatários e contêm matéria confidencial e legalmente protegida, pelo que se informa que o uso não autorizado da mesma é proibido por lei. Se receber esta mensagem por engano, ou não for o destinatário pretendido pelo remetente, agradecemos contacto por email ou por telefone e eliminação da mensagem e anexos, sem reprodução ou transmissão a quaisquer terceiros. Opiniões, conclusões ou qualquer outra informação expressas nesta mensagem que não se relacionem com o negócio da Krypton – Produção de Ideias para a Comunicação, Lda. devem ser entendidas como nunca tendo sido dadas ou endossadas pela mesma.';
 
+			const websiteLinks = isInternational
+				? `
+					<a href="https://www.kryptonfilmsinternational.com/">www.kryptonfilmsinternational.com</a><br>
+					<a href="https://vimeo.com/kryptoninternational">vimeo.com/kryptoninternational</a><br>
+					<a href="https://www.instagram.com/kryptoninternational/">instagram.com/kryptoninternational</a><br><br>
+				`
+				: `
+					<a href="https://www.kryptonfilms.com/">www.kryptonfilms.com</a><br><br>
+				`;
+
 			const signature = `
 			<div dir="ltr" style="font-size: 19px;">
 				<div style="font-family: Helvetica; font-size: 12px;">
@@ -311,7 +321,7 @@
 						<span>Rua da Junqueira, nº 354</span><br>
 						<span>1300-340 Lisboa</span><br>
 						<span>+351 21 360 07 50</span><br>
-						<a href="http://www.kryptonfilms.com/">www.kryptonfilms.com</a><br><br>
+						${websiteLinks}
 					</font>
 					<img src="${kryptonImage}" alt="krypton logo"><br>
 					<img src="${bestImage}" alt="best krypton"><br><br>
