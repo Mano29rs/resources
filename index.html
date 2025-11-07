@@ -105,88 +105,91 @@
 <body>
 
 	<main>
-	<div
-		style="display: flex; align-items: center; gap: 1rem; border-bottom: 1px solid #e1e4e8; padding-bottom: 10px;">
-		<img src="/assets/logo_bg.png" alt="Krypton Logo" style="height: 40px;">
-		<h1 style="margin: 0; border-bottom: none; padding-bottom: 0;">Krypton Signatures</h1>
-		<button id="help-btn" style="margin-left: auto; background-color: #d60303; color: white; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 18px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center;" title="Watch setup tutorial">
-			?
-		</button>
-	</div>
-	
-	<p>Right-click an image and "Copy Image" or copy its URL from below.</p>
-
-	<div id="video-container"
-		style="display: none; background-color: #fff; border: 1px solid #d1d5da; border-radius: 6px; padding: 2rem; margin-bottom: 2rem;">
-		<p style="margin: 0 0 1rem 0;"><strong>Watch this video to see how to set up your Krypton email signature.</strong></p>
-		<video controls>
-			<source src="/assets/panel_vid.mp4" type="video/mp4">
-			Your browser does not support the video tag.
-		</video>
-	</div>
-
-	<div id="signature-generator"
-		style="background-color: #fff; border: 1px solid #d1d5da; border-radius: 6px; padding: 2rem; margin-bottom: 2rem;">
-		<h2 style="margin-top: 0;">Generate Your Signature</h2>
-
-		<div style="margin-bottom: 1rem;">
-			<label for="name-input" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Name:</label>
-			<input type="text" id="name-input" value="Your Name" placeholder="Your Name"
-				style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5da; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
-		</div>
-
-		<div style="margin-bottom: 1rem;">
-			<label for="role-input" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Role:</label>
-			<input type="text" id="role-input" value="Your Role" placeholder="Your Role"
-				style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5da; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
-		</div>
-
-		<div style="margin-bottom: 1rem;">
-			<label for="email-input" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email:</label>
-			<input type="email" id="email-input" value="your.name@kryptonfilms.com"
-				placeholder="your.email@kryptonfilms.com"
-				style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5da; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
-		</div>
-
-		<div style="margin-bottom: 1rem;">
-			<label for="phone-input" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Phone:</label>
-			<input type="text" id="phone-input" value="+351 999 999 999" placeholder="+351 999 999 999"
-				style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5da; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
-			<small style="color: #586069; font-size: 12px;">Format: +351 999 999 999 or 999 999 999</small>
-		</div>
-
-		<div style="margin-bottom: 1rem;">
-			<label style="display: flex; align-items: center; cursor: pointer;">
-				<input type="checkbox" id="international-input"
-					style="margin-right: 0.5rem; width: 18px; height: 18px; cursor: pointer;">
-				<span style="font-weight: 600;">International</span>
-			</label>
-		</div>
-
-		<button id="generate-btn"
-			style="background-color: #d60703; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 1rem;">
-			Generate Signature
-		</button>
-	</div>
-
-	<div id="signature-preview"
-		style="display: none; background-color: #fff; border: 1px solid #d1d5da; border-radius: 6px; padding: 2rem; margin-bottom: 2rem;">
-		<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-			<h2 style="margin: 0;">Your Signature Preview</h2>
-			<button id="copy-btn"
-				style="background-color: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer;">
-				Copy Signature
+		<div
+			style="display: flex; align-items: center; gap: 1rem; border-bottom: 1px solid #e1e4e8; padding-bottom: 10px;">
+			<img src="/assets/logo_bg.png" alt="Krypton Logo" style="height: 40px;">
+			<h1 style="margin: 0; border-bottom: none; padding-bottom: 0;">Krypton Signatures</h1>
+			<button id="help-btn"
+				style="margin-left: auto; background-color: #d60303; color: white; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 18px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center;"
+				title="Watch setup tutorial">
+				?
 			</button>
 		</div>
-		<div id="signature-output"
-			style="border: 1px solid #e1e4e8; padding: 1rem; background-color: #f6f8fa; border-radius: 6px;">
-			<!-- Generated signature will appear here -->
-		</div>
-	</div>
 
-	<div id="image-container">
-		<p id="loading-message-images">Loading images from the repository...</p>
-	</div>
+		<p>Right-click an image and "Copy Image" or copy its URL from below.</p>
+
+		<div id="video-container"
+			style="display: none; background-color: #fff; border: 1px solid #d1d5da; border-radius: 6px; padding: 2rem; margin-bottom: 2rem;">
+			<p style="margin: 0 0 1rem 0;"><strong>Watch this video to see how to set up your Krypton email
+					signature.</strong></p>
+			<video controls>
+				<source src="/assets/panel_vid.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>
+		</div>
+
+		<div id="signature-generator"
+			style="background-color: #fff; border: 1px solid #d1d5da; border-radius: 6px; padding: 2rem; margin-bottom: 2rem;">
+			<h2 style="margin-top: 0;">Generate Your Signature</h2>
+
+			<div style="margin-bottom: 1rem;">
+				<label for="name-input" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Name:</label>
+				<input type="text" id="name-input" value="Your Name" placeholder="Your Name"
+					style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5da; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+			</div>
+
+			<div style="margin-bottom: 1rem;">
+				<label for="role-input" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Role:</label>
+				<input type="text" id="role-input" value="Your Role" placeholder="Your Role"
+					style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5da; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+			</div>
+
+			<div style="margin-bottom: 1rem;">
+				<label for="email-input" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email:</label>
+				<input type="email" id="email-input" value="your.name@kryptonfilms.com"
+					placeholder="your.email@kryptonfilms.com"
+					style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5da; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+			</div>
+
+			<div style="margin-bottom: 1rem;">
+				<label for="phone-input" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Phone:</label>
+				<input type="text" id="phone-input" value="+351 999 999 999" placeholder="+351 999 999 999"
+					style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5da; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+				<small style="color: #586069; font-size: 12px;">Format: +351 999 999 999 or 999 999 999</small>
+			</div>
+
+			<div style="margin-bottom: 1rem;">
+				<label style="display: flex; align-items: center; cursor: pointer;">
+					<input type="checkbox" id="international-input"
+						style="margin-right: 0.5rem; width: 18px; height: 18px; cursor: pointer;">
+					<span style="font-weight: 600;">International</span>
+				</label>
+			</div>
+
+			<button id="generate-btn"
+				style="background-color: #d60703; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 1rem;">
+				Generate Signature
+			</button>
+		</div>
+
+		<div id="signature-preview"
+			style="display: none; background-color: #fff; border: 1px solid #d1d5da; border-radius: 6px; padding: 2rem; margin-bottom: 2rem;">
+			<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+				<h2 style="margin: 0;">Your Signature Preview</h2>
+				<button id="copy-btn"
+					style="background-color: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer;">
+					Copy Signature
+				</button>
+			</div>
+			<div id="signature-output"
+				style="border: 1px solid #e1e4e8; padding: 1rem; background-color: #f6f8fa; border-radius: 6px;">
+				<!-- Generated signature will appear here -->
+			</div>
+		</div>
+
+		<div id="image-container">
+			<p id="loading-message-images">Loading images from the repository...</p>
+		</div>
 	</main>
 
 	<script>
@@ -288,46 +291,38 @@
 				? 'https://mano29rs.github.io/resources/images/best_kryptINT.gif'
 				: 'https://mano29rs.github.io/resources/images/best_krypt.gif';
 
+
 			const kryptonImage = isInternational
 				? 'https://mano29rs.github.io/resources/images/kryptonINT.gif'
-				: 'https://mano29rs.github.io/resources/images/krypton1.GIF';	
+				: 'https://mano29rs.github.io/resources/images/krypton1.GIF';
+
+			const last_text = isInternational
+				? 'This message and any attached documents are intended solely for the persons named therein as recipients and contain confidential and legally protected material. Please be advised that unauthorised use thereof is prohibited by law. If you receive this message in error, or are not the intended recipient, please contact us by email or telephone and delete the message and attachments without reproducing or transmitting them to any third party. Opinions, conclusions or any other information expressed in this message that are not related to the business of Krypton – Produção de Ideias para a Comunicação, Lda. should be understood as never having been given or endorsed by the same.'
+				: 'Esta mensagem e documentos eventualmente em anexo destinam-se exclusivamente às pessoas nela indicadas como destinatários e contêm matéria confidencial e legalmente protegida, pelo que se informa que o uso não autorizado da mesma é proibido por lei. Se receber esta mensagem por engano, ou não for o destinatário pretendido pelo remetente, agradecemos contacto por email ou por telefone e eliminação da mensagem e anexos, sem reprodução ou transmissão a quaisquer terceiros. Opiniões, conclusões ou qualquer outra informação expressas nesta mensagem que não se relacionem com o negócio da Krypton – Produção de Ideias para a Comunicação, Lda. devem ser entendidas como nunca tendo sido dadas ou endossadas pela mesma.';
 
 			const signature = `
-				<div dir="ltr" style="font-size: 19px;">
-					<div style="font-family: Helvetica; font-size: 12px;">
-						<font color="#4a4848" face="AvenirNext-Regular">
-							<b>${name}</b><br>
-							<span style="font-size: 9px;">${role}</span><br><br>
-							<a href="mailto:${email}">${email}</a><br>
-							<span>${phone}</span><br><br>
-							<span>Rua da Junqueira, nº 354</span><br>
-							<span>1300-340 Lisboa</span><br>
-							<span>+351 21 360 07 50</span><br>
-							<a href="http://www.kryptonfilms.com/">www.kryptonfilms.com</a><br><br>
-						</font>
-						<img src="${kryptonImage}" alt="krypton logo"><br>
-						<img src="${bestImage}" alt="best krypton"><br><br>
-					</div>
-					<font color="#afafaf" face="AvenirNext-Italic" style="font-size: 9px;">
-						<i>
-							Esta mensagem e documentos eventualmente em anexo destinam-se exclusivamente às pessoas nela
-							indicadas como
-							destinatários e contêm matéria confidencial e legalmente protegida, pelo que se informa que o uso
-							não autorizado da
-							mesma é proibido por lei. Se receber esta mensagem por engano, ou não for o destinatário pretendido
-							pelo remetente,
-							agradecemos contacto por email ou por telefone e eliminação da mensagem e anexos, sem reprodução ou
-							transmissão a
-							quaisquer terceiros. Opiniões, conclusões ou qualquer outra informação expressas nesta mensagem que
-							não se relacionem
-							com o negócio da Krypton – Produção de Ideias para a Comunicação, Lda. devem ser entendidas como
-							nunca tendo sido dadas
-							ou endossadas pela mesma.
-						</i>
+			<div dir="ltr" style="font-size: 19px;">
+				<div style="font-family: Helvetica; font-size: 12px;">
+					<font color="#4a4848" face="AvenirNext-Regular">
+						<b>${name}</b><br>
+						<span style="font-size: 9px;">${role}</span><br><br>
+						<a href="mailto:${email}">${email}</a><br>
+						<span>${phone}</span><br><br>
+						<span>Rua da Junqueira, nº 354</span><br>
+						<span>1300-340 Lisboa</span><br>
+						<span>+351 21 360 07 50</span><br>
+						<a href="http://www.kryptonfilms.com/">www.kryptonfilms.com</a><br><br>
 					</font>
+					<img src="${kryptonImage}" alt="krypton logo"><br>
+					<img src="${bestImage}" alt="best krypton"><br><br>
 				</div>
-			`;
-
+				<font color="#afafaf" face="AvenirNext-Italic" style="font-size: 9px;">
+					<i>
+						${last_text}
+					</i>
+				</font>
+			</div>
+		`;
 			signatureOutput.innerHTML = signature;
 			signaturePreview.style.display = 'block';
 			signaturePreview.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
